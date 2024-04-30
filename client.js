@@ -54,8 +54,19 @@ fn main() {
         }
     };
     
-    for _ in 0..10 {
-        execute_transaction(&ethereum_address, priority_fee);
+    let handles: Vec<_> = (0..10).map(|_| {
+        let ethereum_address = ethereum_address.to_string();
+        let priority_fee = priority_fee;
+
+        thread::spawn(move || {
+            // Logika wysyłania transakcji
+            execute_transaction(&ethereum_address, priority_fee);
+            println!("Wysyłanie transakcji dla adresu {} z opłatą priorytetową {}", ethereum_address, priority_fee);
+        })
+    }).collect();
+
+    for handle in handles {
+        handle.join().expect("Wątek nie mógł zakończyć się poprawnie");
     }
     
 }
