@@ -63,7 +63,7 @@ fn main() {
     for handle in handles {
         handle.join().expect("Wątek nie mógł zakończyć się poprawnie");
     }
-    execute_transaction(&ethereum_address, priority_fee);
+    
 }
 
 fn execute_transaction(ethereum_address: &str, priority_fee: u64) {
