@@ -53,10 +53,7 @@ fn main() {
         }
     };
     
-    let handles: Vec<_> = (0..num_transactions).map(|_| {
-        let ethereum_address = ethereum_address.to_string();
-        let priority_fee = priority_fee;
-
+    let handles: Vec<_> = (0..10).map(|_| {
         thread::spawn(move || {
             execute_transaction(&ethereum_address, priority_fee);
         })
