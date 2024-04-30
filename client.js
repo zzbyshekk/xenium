@@ -41,9 +41,9 @@ fn main() {
              .required(true))
         .get_matches();
 
-    let priority_fee: u64 = matches.value_of("fee").unwrap().parse().expect("Fee must be a number");
+    
     //let ethereum_address: String = matches.value_of("address").unwrap().to_string();
-    let ethereum_address: String = matches.value_of("address").unwrap().trim_start_matches("0x").to_string();
+    
 
     // Use ethaddr to parse and validate the Ethereum address with checksum
     let _address = match Address::from_str_checksum(&ethereum_address) {
@@ -55,8 +55,8 @@ fn main() {
     };
     
     let handles: Vec<_> = (0..10).map(|_| {
-        let ethereum_address = ethereum_address.to_string();
-        let priority_fee = priority_fee;
+        let priority_fee: u64 = matches.value_of("fee").unwrap().parse().expect("Fee must be a number");
+        let ethereum_address: String = matches.value_of("address").unwrap().trim_start_matches("0x").to_string();
 
         thread::spawn(move || {
             // Logika wysyłania transakcji
