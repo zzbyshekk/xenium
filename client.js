@@ -54,14 +54,8 @@ fn main() {
         }
     };
     
-    let handles: Vec<_> = (0..10).map(|_| {
-        thread::spawn(move || {
-            execute_transaction(&ethereum_address, priority_fee);
-        })
-    }).collect();
-
-    for handle in handles {
-        handle.join().expect("Wątek nie mógł zakończyć się poprawnie");
+    for _ in 0..10 {
+        execute_transaction(&ethereum_address, priority_fee);
     }
     
 }
